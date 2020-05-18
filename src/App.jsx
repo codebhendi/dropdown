@@ -1,23 +1,39 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { createUseStyles } from 'react-jss';
 
-// Root component to handle user check and routing of all compoennt.
-class App extends Component {
-  constructor(props) {
-    super(props);
+import Dropdown from './Dropdown';
 
-    this.state = { loading: true, user: null };
+const makeid = () => {
+  let result = '';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+  for (let i = 0; i < 6; i += 1) {
+    result += characters.charAt(Math.floor(Math.random() * 62));
   }
 
-  render = () => {
+  return result;
+};
 
-    return (
-      <>
-        Hello World
-      </>
-    );
-  }
-}
+const list = Array.from(new Array(100)).map(() => {
+  const id = makeid();
+  return { name: id, value: id };
+});
 
-App.propTypes = {};
+const useStyles = createUseStyles({
+  container: {
+    display: 'flex',
+    padding: '10rem',
+  },
+});
+
+const App = () => {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.container}>
+      <Dropdown multiselect options={list} />
+    </div>
+  );
+};
 
 export default App;
