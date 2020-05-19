@@ -14,9 +14,9 @@ const makeid = () => {
   return result;
 };
 
-const list = Array.from(new Array(100)).map(() => {
+const list = Array.from(new Array(100000)).map((d, i) => {
   const id = makeid();
-  return { name: id, value: id };
+  return { name: id, value: i };
 });
 
 const useStyles = createUseStyles({
@@ -31,7 +31,10 @@ const App = () => {
 
   return (
     <div className={classes.container}>
-      <Dropdown multiselect options={list} />
+      <Dropdown
+        multiselect
+        options={list}
+      />
     </div>
   );
 };
